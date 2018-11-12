@@ -1,0 +1,12 @@
+@echo off
+set OS_AUTH_URL=http://10.28.3.240:5000/v3
+set OS_IDENTITY_API_VERSION=3
+set OS_TENANT_NAME=58d572ff7e764228a096bf190331a2ba
+set OS_PROJECT_NAME=fj_anamamani_at07-desktop
+set OS_USERNAME=AnaMamani
+set OS_PASSWORD=Invierno7894561231
+set OS_DOMAIN_NAME=fundacion-jala
+set OS_FLAVOR=f2.desktop.tiny
+set OS_IMAGE=ubuntu-14.04-amd64-server_18062018
+set OS_KEY_PAIR_NAME=ana
+set OS_REGION_NAME=bootstack-jalasoft
