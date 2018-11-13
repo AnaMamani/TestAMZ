@@ -1,21 +1,17 @@
 version: '3'
 services:
-  slave:
-    image: docker pull registry.jala.info/devops/jenkinsci/slave:3.27-1-alpine
-    labels:
-      io.rancher.scheduler.global: 'true'
-      io.rancher.scheduler.affinity:host_label: slave.jenkins=true
-    links:
-      - master:master
-    volumes:
-      - ./jenkins_slave:/var/jenkins_home
-  master:
-    image:
-      "registry.jala.info/devops/jenkins/jenkins:2.107.3-alpine"
+  jenkins_server:
+    image: "registry.jala.info/devops/jenkins/jenkins:2.107.3-alpine"
     ports:
       - "8080:8080"
       - "5000:5000"
     volumes:
       - ./jenkins:/var/jenkins_home
-
-				
+services:
+  jenkins_server:
+    image: "registry.jala.info/devops/jenkins/jnlp-slave:3.27-1-alpine"
+    environment:
+      - JENKINS_URL=https://jenkins.server:50000
+      - ENKINS_AGENT_NAME = testJenkins
+      - JENKINS_AGENT_WORKDIR= /home/jenkins/agent
+      
