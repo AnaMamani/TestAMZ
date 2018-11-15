@@ -7,11 +7,26 @@ services:
       - "5000:5000"
     volumes:
       - ./jenkins:/var/jenkins_home
-services:
-  jenkins_server:
-    image: "registry.jala.info/devops/jenkins/jnlp-slave:3.27-1-alpine"
+  gocd_server:
+    image: "registry.jala.info/devops/gocd/gocd-server:v18.1.0"
+    ports:
+      - "8153:8153"
+      - "8154:8154"
+    links:
+      - agent_server
+
+  agent_server:
+    image: "registry.jala.info/devops/gocd/gocd-agent-alpine-3.7:v18.1.0"
     environment:
-      - JENKINS_URL=https://jenkins.server:50000
-      - ENKINS_AGENT_NAME = testJenkins
-      - JENKINS_AGENT_WORKDIR= /home/jenkins/agent
-      
+      - GO_SERVER_URL=https://gocd_server:8154/go
+    volumes:
+      - ./go_cd:/go_cd
+      - ./go:/home/go
+
+  sonarqube:
+    image: "registry.jala.info/devops/sonarqube:6.7.4-alpine"
+    ports:
+      - 9000:9000
+      - 9092:9092
+    links:
+      - agent_server
