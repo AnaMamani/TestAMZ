@@ -31,4 +31,3 @@ services:
       - "9092:9092"
     links:
       - gocd_agent
-      
