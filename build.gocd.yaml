@@ -131,7 +131,7 @@ pipelines:
             deploy_gradle: 
               tasks:
                 - exec:
-                   working_directory: JavaWebApplication
+                   working_directory: webApplication
                    command: ./gradlew
                    arguments:
                     - -b
