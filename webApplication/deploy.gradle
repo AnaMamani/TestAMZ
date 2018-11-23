@@ -10,7 +10,7 @@ remotes {
   dev_server {
     host = '10.28.138.120'
     user = 'ubuntu'
-    identity = file("C:/Users/Admin/Desktop/config-lab/vagrant/ana.pem")
+    identity = file("./ana.pem")
   }
   qa_server {
     host = '10.28.115.178'
