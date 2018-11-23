@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.gradle.PersonTest" tests="11" skipped="0" failures="0" errors="0" timestamp="2018-11-23T00:41:22" hostname="at07-devops" time="0.005">
+  <properties/>
+  <testcase name="canConstructAPersonWithAName" classname="org.gradle.PersonTest" time="0.002"/>
+  <testcase name="canConstructAPersonWithGander" classname="org.gradle.PersonTest" time="0.0"/>
+  <testcase name="canConstructAPersonWithNumber" classname="org.gradle.PersonTest" time="0.0"/>
+  <testcase name="notCanConstructAPersonWithANameEmpty" classname="org.gradle.PersonTest" time="0.0"/>
+  <testcase name="notCanConstructAPersonWithACiEmpty" classname="org.gradle.PersonTest" time="0.0"/>
+  <testcase name="canConstructAPersonWithAgeLess" classname="org.gradle.PersonTest" time="0.0"/>
+  <testcase name="canConstructAPersonWithAgeMajor" classname="org.gradle.PersonTest" time="0.0"/>
+  <testcase name="canConstructAPersonWithACi" classname="org.gradle.PersonTest" time="0.0"/>
+  <testcase name="canConstructAPersonWithAge" classname="org.gradle.PersonTest" time="0.0"/>
+  <testcase name="noCanConstructAPersonWithACiError" classname="org.gradle.PersonTest" time="0.0"/>
+  <testcase name="canConstructAPersonWithALastName" classname="org.gradle.PersonTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

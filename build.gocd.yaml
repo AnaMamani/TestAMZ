@@ -63,3 +63,77 @@ pipelines:
                     destination: html
               tabs:
                 OWASP: html/dependency-check-report.html
+  amz-webApplication:
+    group: webApplication
+    materials:
+      repo:
+        git: https://github.com/devops-at07/TestAMZ.git
+        branch: master
+        whitelist:
+            - webApplication/**/*
+    stages:
+      - Build:
+          jobs:
+            Building:
+              tasks:
+                - exec:
+                    working_directory: webApplication
+                    command: ./gradlew
+                    arguments:
+                      - clean
+                      - assemble
+              artifacts:
+                - build:
+                    source: webApplication/build/libs/*.war
+                    destination: war
+      - Test:
+          jobs:
+            Unit_Test:
+              tasks:
+                - exec:
+                    working_directory: webApplication
+                    command: ./gradlew
+                    arguments:
+                      - test
+              artifacts:
+                - build:
+                    source: webApplication/build/reports/tests/test/**/*
+                    destination: html
+                - test:
+                    source: webApplication/build/test-results/test/*.xml
+                    destination: xml
+              tabs:
+                unit_test: html/index.html
+      - Security:
+          jobs:
+            Sonarqube:
+              tasks:
+                - exec:
+                    working_directory: webApplication
+                    command: ./gradlew
+                    arguments:
+                      - sonarqube
+          Owasp:
+              tasks:
+                - exec:
+                    working_directory: webApplication
+                    command: ./gradlew
+                    arguments:
+                      - dependencyCheckAnalyze
+              artifacts:
+                - build:
+                    source: webApplication/build/reports/**/*
+                    destination: html
+              tabs:
+                OWASP: html/dependency-check-report.html   
+      - Deploy:
+          jobs:
+            deploy_gradle: 
+              tasks:
+                - exec:
+                   working_directory: JavaWebApplication
+                   command: ./gradlew
+                   arguments:
+                    - -b
+                    - deploy.gradle
+                    - copyWar
