@@ -113,7 +113,7 @@ pipelines:
                     command: ./gradlew
                     arguments:
                       - sonarqube
-          Owasp:
+            Owasp:
               tasks:
                 - exec:
                     working_directory: webApplication
