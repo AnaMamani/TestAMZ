@@ -19,21 +19,29 @@ pipeline {
            archiveArtifacts artifacts: '**/repos/*.jar'
          }
        }
-       stage ('Build') {
+       stage ('Build_webApplication') {
          steps {
            sh './webApplication/gradlew clean assemble -p webApplication'
+           sh './webApplication/gradlew uploadArchives -p webApplication'
+           archiveArtifacts artifacts: '**/repos/*.war'
          }
        }
-       stage ('Testing') {
+       stage ('Testing_webApplication') {
          steps {
            sh './webApplication/gradlew test -p webApplication'
-           junit '**/build/test-results/test/*.xml'
+           archiveArtifacts artifacts: '**/reports/tests/test/*.html'
          }
        }
-       stage ('Publish') {
+       stage ('Security_webApplication') {
          steps {
-           sh './webApplication/gradlew uploadArchives -p webApplication'
-           archiveArtifacts artifacts: '**/repos/*.jar'
+           sh './webApplication/gradlew  sonarqube -p webApplication '
+           sh './webApplication/gradlew  dependencyCheckAnalyze -p webApplication'
+           archiveArtifacts artifacts: '**/reports/*.html'
+         }
+       }
+       stage ('Deploy_webApplication') {
+         steps {
+           sh './webApplication/gradlew -b deploy.gradle copyWar'         
          }
        }
     }
